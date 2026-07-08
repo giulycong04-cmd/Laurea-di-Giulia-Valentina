@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#f4a6c1" />
+  <title>Laurea di Giulia & Valentina</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="bg-sticker flower-one">✿</div>
+  <div class="bg-sticker flower-two">❀</div>
+  <div class="bg-sticker boot">🤠</div>
+
+  <main class="app">
+    <section class="hero">
+      <p class="eyebrow">🎓 Flower Cowgirl Camera • Hip Hop Edition</p>
+      <h1 id="eventTitle">Laurea di Giulia & Valentina</h1>
+      <p id="eventSubtitle">Scatta i tuoi ricordi della serata. Hai un piccolo rullino digitale.</p>
+      <div class="vibe-row" aria-hidden="true">
+        <span>🌸</span><span>🤠</span><span>📸</span><span>💎</span><span>🎧</span>
+      </div>
+    </section>
+
+    <section class="card" id="startCard">
+      <div class="badge">20 scatti max a persona</div>
+      <label class="label" for="guestName">Il tuo nome</label>
+      <input id="guestName" class="input" placeholder="Es. Marco" autocomplete="name" />
+      <button id="startBtn" class="button primary">Inizia il rullino ✨</button>
+      <p class="small">Le foto verranno caricate nell'album segreto della festa. Niente stress, solo ricordi belli.</p>
+    </section>
+
+    <section class="camera hidden" id="cameraCard">
+      <div class="topbar">
+        <div>
+          <p class="small">Scatti rimasti</p>
+          <strong id="shotsLeft">20</strong>
+        </div>
+        <div id="filmStrip" class="filmstrip" aria-label="Rullino"></div>
+      </div>
+
+      <div class="camera-frame">
+        <video id="video" autoplay playsinline muted></video>
+      </div>
+      <canvas id="canvas" class="hidden"></canvas>
+
+      <div class="controls">
+        <button id="switchBtn" class="button ghost">Gira camera</button>
+        <button id="captureBtn" class="shutter" aria-label="Scatta foto"></button>
+        <button id="finishBtn" class="button ghost">Fine</button>
+      </div>
+
+      <p id="status" class="status">Pronto a scattare.</p>
+    </section>
+
+    <section class="card hidden" id="doneCard">
+      <h2>🎉 Rullino completato</h2>
+      <p>Grazie! Le tue foto sono state salvate tra i ricordi di Giulia e Valentina.</p>
+      <p class="small">Puoi chiudere questa pagina e tornare a festeggiare.</p>
+    </section>
+
+    <section class="card error hidden" id="errorCard">
+      <h2>Ops</h2>
+      <p id="errorText"></p>
+    </section>
+  </main>
+
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
