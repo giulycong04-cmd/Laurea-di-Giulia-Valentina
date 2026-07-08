@@ -100,6 +100,7 @@ async function startCamera(restarting = false) {
     stream = await getCameraStream();
     els.video.srcObject = stream;
     await waitForVideoReady(els.video);
+    updateCameraOrientation();
     els.startCard.classList.add('hidden');
     els.cameraCard.classList.remove('hidden');
     hideError();
@@ -133,7 +134,7 @@ async function captureAndUpload() {
   canvas.width = size.width;
   canvas.height = size.height;
   const ctx = canvas.getContext('2d');
-  ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+  drawCameraFrame(ctx, video, canvas.width, canvas.height);
   applyDisposableFilter(ctx, canvas.width, canvas.height);
 
   try {
@@ -215,6 +216,23 @@ function getCaptureSize(video) {
     width: Math.round(sourceWidth * scale),
     height: Math.round(sourceHeight * scale)
   };
+}
+
+function updateCameraOrientation() {
+  els.video.classList.toggle('selfie-video', facingMode === 'user');
+}
+
+function drawCameraFrame(ctx, video, width, height) {
+  if (facingMode !== 'user') {
+    ctx.drawImage(video, 0, 0, width, height);
+    return;
+  }
+
+  ctx.save();
+  ctx.translate(width, 0);
+  ctx.scale(-1, 1);
+  ctx.drawImage(video, 0, 0, width, height);
+  ctx.restore();
 }
 
 function canvasToBlob(canvas, type, quality) {
@@ -315,4 +333,5 @@ function stopStream() {
   if (!stream) return;
   stream.getTracks().forEach(track => track.stop());
   stream = null;
+  els.video.classList.remove('selfie-video');
 }
