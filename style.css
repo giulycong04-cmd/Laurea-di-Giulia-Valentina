@@ -180,6 +180,10 @@ video {
   aspect-ratio: 3 / 4;
   display: block;
   filter: sepia(.18) saturate(.82) contrast(1.08) brightness(1.04);
+  transform: translateZ(0);
+}
+video.selfie-video {
+  transform: scaleX(-1) translateZ(0);
 }
 .controls { display: grid; grid-template-columns: 1fr 90px 1fr; align-items: center; gap: 10px; margin-top: 15px; }
 .shutter {
